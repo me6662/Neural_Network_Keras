@@ -6,6 +6,10 @@ from keras.layers import Embedding, LSTM
 from keras.layers import Dense
 from tensorflow.python.keras.backend import sigmoid
 from matplotlib import pyplot as plt
+# keras : 2.4.3
+# numpy : 1.19.2
+# tensorflow : 2.4.0 / cuda : 11.0 / cuDNN : 8.0.4
+
 
 training_set, testing_set = imdb.load_data(num_words=10000)
 # 데이터 셋에 저장된 순서대로 단어 10000 개를 가져옴 > 리뷰에 고유한 단어가 10000개만 쓰임.
@@ -71,9 +75,10 @@ RMSprop_score, RMSprop_model = train_model(
 
 # 결과 분석!
 
-plt.plot(range(1, 11), RMSprop_score.history['acc'], label='Training Accuracy')
 plt.plot(range(1, 11),
-         RMSprop_score.history['val_acc'], label='Validation Accuracy')
+         RMSprop_score.history['accuracy'], label='Training Accuracy')
+plt.plot(range(1, 11),
+         RMSprop_score.history['val_accuracy'], label='Validation Accuracy')
 plt.axis([1, 10, 0, 1])  # 축 범위 (x 축 : 1~10, y축 : 0~ 1)
 plt.xlabel('Epoch')
 plt.ylabel('Accuracy')
